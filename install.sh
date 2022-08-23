@@ -1,10 +1,13 @@
 #!/usr/bin/env bash -e
 set -e # Stop if anything goes wrong
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 # Clone the repo
 if [ ! -d DNABERT ]; then
 	git clone https://github.com/ChuanyiZ/DNABERT.git
 fi
-cd DNABERT
+cd "$SCRIPT_DIR/DNABERT"
 
 # Current code is done on cz/modular branch
 git checkout cz/modular
@@ -29,13 +32,15 @@ conda activate dnabert
 # so we simply trust the server. DANGEROUS!
 pip3 install torch==1.7.0 torchaudio --index-url https://download.pytorch.org/whl/cu110 --extra-index-url https://artifactory.mayo.edu/artifactory/api/pypi/pypi-remote/simple --trusted-host download.pytorch.org
 
-cd DNABERT
+cd "$SCRIPT_DIR/DNABERT"
 python3 -m pip install --editable .
-cd examples
+cd "$SCRIPT_DIR/DNABERT/examples"
 python3 -m pip install -r requirements.txt
 
 # Install Nvidia Apex to allow 16-bit precision (faster)
-cd ../..
+cd "$SCRIPT_DIR"
 git clone https://github.com/NVIDIA/apex
-cd apex
+cd "$SCRIPT_DIR/apex"
 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+
+cd "$SCRIPT_DIR"
