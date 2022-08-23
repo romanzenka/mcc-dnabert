@@ -1,4 +1,5 @@
 #!/usr/bin/env bash -e
+set -e # Stop if anything goes wrong
 # Clone the repo
 if [ ! -d DNABERT ]; then
 	git clone https://github.com/ChuanyiZ/DNABERT.git
