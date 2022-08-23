@@ -1,4 +1,5 @@
-PATH_TO_DNABERT_REPO=/home/jupyter/dnabert/DNABERT
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PATH_TO_DNABERT_REPO=$SCRIPT_DIR/DNABERT
 cd $PATH_TO_DNABERT_REPO/examples
 
 export KMER=6
