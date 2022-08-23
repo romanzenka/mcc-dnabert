@@ -41,6 +41,6 @@ python3 -m pip install -r requirements.txt
 cd "$SCRIPT_DIR"
 git clone https://github.com/NVIDIA/apex
 cd "$SCRIPT_DIR/apex"
-pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+MAKEFLAGS="-j$(nproc)" pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
 cd "$SCRIPT_DIR"
