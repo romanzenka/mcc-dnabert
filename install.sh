@@ -13,7 +13,7 @@ cd "$SCRIPT_DIR/DNABERT"
 git checkout cz/modular
 
 # Conda is pre-set to cache stuff as root, chown to jupyter user
-sudo chown jupyter -R /opt/conda/pkgs/cache # Make conda work for Jupyter (by default set up for root only)
+sudo chown "$(whoami)" -R /opt/conda/pkgs/cache # Make conda work for Jupyter (by default set up for root only)
 
 # Make conda work in this shell script
 eval "$(conda shell.bash hook)"
