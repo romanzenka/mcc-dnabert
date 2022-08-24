@@ -3,6 +3,8 @@ set -e # Stop if anything goes wrong
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+CONDA_ENV=dnabert # Which conda environment to create
+
 # Clone the repo
 if [ ! -d DNABERT ]; then
 	git clone https://github.com/ChuanyiZ/DNABERT.git
@@ -20,8 +22,8 @@ eval "$(conda shell.bash hook)"
 
 # Install dependencies as per https://github.com/jerryji1993/DNABERT#1-environment-setup
 # Note python 3.7 to be compatible with pytorch for newer CUDA
-conda create -y -n dnabert python=3.7
-conda activate dnabert
+conda create -y -n $CONDA_ENV python=3.7
+conda activate $CONDA_ENV
 
 # This is what the original asked for. This does not work on mforge as Artifactory does not mirror the -c pytorch channel
 # conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
@@ -44,3 +46,5 @@ cd "$SCRIPT_DIR/apex"
 MAKEFLAGS="-j$(nproc)" pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
 cd "$SCRIPT_DIR"
+
+echo "Use\n\tconda activate $CONDA_ENV\n to use DNABERT"
